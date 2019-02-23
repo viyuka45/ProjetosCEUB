@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<style>
+
+    .table tbody tr.highlight td {
+        background-color: #dd181a;
+    }
+
+    .table tbody tr.highdark td {
+        background-color: #3143dd;
+    }
+
+
+</style>
+<html>
+    <head>
+        <title> My first Java </title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
+        <script src="js/jquery-3.3.1.slim.min.js"></script>
+    </head>
+
+<body>
+<div class="container">
+    <table class="table table-hover" id="tabelaDeTarefas">
+        <thead>
+        <tr>
+            <th>Tarefa</th>
+            <th>Data</th>
+            <th>Feito</th>
+        </tr>
+        </thead>
+        <tbody id="Mybody">
+        <tr id="corpoTarefa1">
+            <td id="tarefa1">
+                Ir ao shopping
+            </td>
+            <td>
+                <input type="date" name="bday">
+            </td>
+            <td>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                    <label class="custom-control-label" for="customCheck"></label>
+                </div>
+        </tr>
+        </tbody>
+    </table>
+    <!-- Input para Contador de Tarefas --->
+    <input type="hidden" name="contadorDeTarefa" id="contadorDeTarefa" value="1">
+
+
+    <div class="row">
+        <div class="col">
+            <label for="novaTarefa"></label>
+            <input type="text" class="form-control" id="novaTarefa" placeholder="Nova Tarefa">
+
+        </div>
+        <div class="col">
+            <label for="alterarTarefa"></label>
+            <input type="text" class="form-control" id="alterarTarefa" placeholder="Alterar Tarefa">
+
+        </div>
+        <div class="col" style="margin-top: 24px;">
+            <button class="btn btn-primary " onclick="adicionarNovaTarefa();">Adicionar</button>
+            <button class="btn btn-primary " onclick="alterarTarefa();">Alterar</button>
+            <button class="btn btn-danger " onclick="removerTarefa();">Remover</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script>
+
+    var trSelecionado;
+
+    //Funcao para adicionar uma nova tarefa na lista.
+    function adicionarNovaTarefa() {
+        //Pega valor do input
+        var nomeTarefa = $('#novaTarefa').val();
+
+        if (nomeTarefa == undefined || nomeTarefa == "") { //Caso o input esteja vazio ou invalido ele alerta
+            alert("ERRO!\nValor invalido ou vazio. Tente Novamente.");
+        } else {
+
+            var contadorDeTarefa = $('#contadorDeTarefa').val(); // Para auxiliar na hora de adicionar a tarefa.
+            var proximaTarefa = parseInt(contadorDeTarefa) + 1;
+
+            //Cria tarefa
+            var montaTagCriacao = '<tr id="tarefa' + proximaTarefa + '">';
+            montaTagCriacao += '<td id="nomeTarefa' + proximaTarefa + '">' + nomeTarefa + '</td>';
+            montaTagCriacao += '<td><form><input type="date" name="bday' + proximaTarefa + '"></form></td>'
+            montaTagCriacao += '<td>'
+            montaTagCriacao += '<form>'
+            montaTagCriacao += '<div class="custom-control custom-checkbox">'
+            montaTagCriacao += '<input type="checkbox" class="custom-control-input" id="feito' + proximaTarefa + '" name="feito' + proximaTarefa + '">'
+            montaTagCriacao += '<label class="custom-control-label" for="feito' + proximaTarefa + '"></label>'
+            montaTagCriacao += '</div>'
+            montaTagCriacao += '</form>'
+            montaTagCriacao += '</tr>'
+
+            //Adiciona Nova tarefa ao corpo da tabela
+            $('#Mybody').append(montaTagCriacao);
+
+            //Atualiza input contadorDeTarefa
+            $('#contadorDeTarefa').val(proximaTarefa);
+
+            //Limpa Campo 'Nova Tarefa'
+            $('#novaTarefa').val('');
+
+            selecionaRow();
+
+        }
+    }
+
+    function alterarTarefa() { //funcao de Alterar a tarefa
+        if (trSelecionado != undefined) {  //Se o valor selecionado for diferente de indefinido
+            var nome = $(`#alterarTarefa`).val();// atribui uma funcao a variavel
+            $(`#` + trSelecionado + `>td:first`).html(nome);
+
+            trSelecionado = undefined;
+            $(`#alterarTarefa`).val(``);
+        } else {
+            alert(`Valor nao selecionado`)
+        }
+
+    }
+
+    function removerTarefa() { //Funcao de remover tarefa
+        if (trSelecionado != undefined) {
+            $('#' + trSelecionado + '').remove();
+            var valorAtual = parseInt($('#contadorDeTarefa').val());
+            $('#contadorDeTarefa').val(valorAtual - 1);
+            trSelecionado = undefined;
+        } else {
+            alert('Valor não selecionado!');
+        }
+    }
+
+    function selecionaRow() { //Funcao de selecionar tarefa
+        $('table tr').click(function () {
+            trSelecionado = $(this).attr('id');
+            $(`#alterarTarefa`).val($(`#` + trSelecionado + `>td`).text());
+            $(this).toggleClass('highlight');
+        });
+    }
+
+    $(document).ready(function () {
+
+        selecionaRow();
+
+    });
+
+</script>
