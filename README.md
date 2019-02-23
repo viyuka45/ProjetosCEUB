@@ -1,5 +1,20 @@
-- Para adicionar uma tarefa, digite no espaÁo onde est· indicado, e clique no bot„o adicionar 
-- Para remover uma tarefa, selecione ela e clique no bot„o remover 
-- para alterar a tarefa, selecione a tarefa desejada e digite no espaÁo indicado para alterar tarefa o novo nome desejado, e apÛs clique no bot„o de alterar 
-- para adicionar uma data a sua tarefa, selecione a data no espaÁo ìdataî 
-- para marc·-la como feita, clique sobre o check box ao lado da data da tarefa
+
+#Lista de Tarefas
+Materia: Estrutura de Dados
+Atividade: 1
+
+Funcionamento:
+
+O projeto tem como objetivo gerar uma lista de tarefas dinamica simples.
+
+Instrucoes:
+
+- Para adicionar uma tarefa, digite no espa√ßo onde est√° indicado, e clique no bot√£o adicionar (+) 
+
+- Para remover uma tarefa, selecione ela e clique no bot√£o remover (Lixeira) 
+
+- Para alterar a tarefa, selecione a tarefa desejada e digite no espa√ßo indicado para alterar tarefa o novo nome desejado, e ap√≥s clique no bot√£o de alterar (<->)  
+
+- Para adicionar uma data a sua tarefa, selecione a data no espa√ßo ‚Äúdata‚Äù 
+
+- Para marc√°-la como feita, clique sobre o check box ao lado da data da tarefa
