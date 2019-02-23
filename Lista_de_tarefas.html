@@ -1,71 +1,94 @@
 <!DOCTYPE html>
-
+<meta charset="UTF-8">
 <style>
 
-    .table tbody tr.highlight td {
-        background-color: #dd181a;
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: grey;
+        color: white;
+        text-align: center;
+        height: 4%;
     }
 
-    .table tbody tr.highdark td {
-        background-color: #3143dd;
+    .fundo {
+        background-image: url("fundo3.jpg");
+
     }
 
+    td {
+        background-color: white;
+    }
+
+    .table thead th {
+        border-bottom: 0px !important;
+    }
 
 </style>
 <html>
-    <head>
-        <title> My first Java </title>
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
-        <script src="js/jquery-3.3.1.slim.min.js"></script>
-    </head>
+<head>
+    <title> My first Java </title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen"/>
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
 
-<body>
-<div class="container">
-    <table class="table table-hover" id="tabelaDeTarefas">
-        <thead>
-        <tr>
-            <th>Tarefa</th>
-            <th>Data</th>
-            <th>Feito</th>
-        </tr>
-        </thead>
-        <tbody id="Mybody">
-        <tr id="corpoTarefa1">
-            <td id="tarefa1">
-                Ir ao shopping
-            </td>
-            <td>
-                <input type="date" name="bday">
-            </td>
-            <td>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-                    <label class="custom-control-label" for="customCheck"></label>
-                </div>
-        </tr>
-        </tbody>
-    </table>
+<body class="fundo">
+<div class="container" style="display:flex;">
+    <div class="col-md-6">
+        <table class="table table-hover" id="tabelaDeTarefas" style="border: 2px solid;">
+            <thead style="background-color:grey;color: white;">
+            <tr>
+                <th>Tarefa</th>
+                <th>Data</th>
+                <th>Feito</th>
+                <th>Acao</th>
+            </tr>
+            </thead>
+            <tbody id="Mybody">
+            <tr id="corpoTarefa1" style="display: none;">
+                <td id="tarefa1">
+                    Ir ao shopping
+                </td>
+                <td>
+                    <input type="date" name="bday">
+                </td>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
+                        <label class="custom-control-label" for="customCheck"></label>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-danger " onclick="removerTarefa();"><i class="far fa-trash-alt"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <!-- Input para Contador de Tarefas --->
     <input type="hidden" name="contadorDeTarefa" id="contadorDeTarefa" value="1">
-
-
-    <div class="row">
-        <div class="col">
+    <div class="col-md-4" style="margin-top: 50px;">
+        <div class="barra"></div>
+        <div class="col" style="display: flex;">
             <label for="novaTarefa"></label>
             <input type="text" class="form-control" id="novaTarefa" placeholder="Nova Tarefa">
-
+            <button style="margin-left: 10px;" class="btn btn-secondary " onclick="adicionarNovaTarefa();"><i
+                    class="far fa-plus-square"></i></button>
         </div>
-        <div class="col">
+        <div class="col" style="display: flex;margin-top:10px;">
             <label for="alterarTarefa"></label>
             <input type="text" class="form-control" id="alterarTarefa" placeholder="Alterar Tarefa">
-
-        </div>
-        <div class="col" style="margin-top: 24px;">
-            <button class="btn btn-primary " onclick="adicionarNovaTarefa();">Adicionar</button>
-            <button class="btn btn-primary " onclick="alterarTarefa();">Alterar</button>
-            <button class="btn btn-danger " onclick="removerTarefa();">Remover</button>
+            <button style="margin-left: 10px;" class="btn btn-secondary" onclick="alterarTarefa();"><i
+                    class="fas fa-exchange-alt"></i></button>
         </div>
     </div>
+</div>
+<div class="footer">
+    <p>Vitoria Yuka - 2019</p>
 </div>
 
 </body>
@@ -90,13 +113,14 @@
             //Cria tarefa
             var montaTagCriacao = '<tr id="tarefa' + proximaTarefa + '">';
             montaTagCriacao += '<td id="nomeTarefa' + proximaTarefa + '">' + nomeTarefa + '</td>';
-            montaTagCriacao += '<td><form><input type="date" name="bday' + proximaTarefa + '"></form></td>'
+            montaTagCriacao += '<td><input type="date" name="bday' + proximaTarefa + '"></td>'
             montaTagCriacao += '<td>'
             montaTagCriacao += '<form>'
             montaTagCriacao += '<div class="custom-control custom-checkbox">'
             montaTagCriacao += '<input type="checkbox" class="custom-control-input" id="feito' + proximaTarefa + '" name="feito' + proximaTarefa + '">'
             montaTagCriacao += '<label class="custom-control-label" for="feito' + proximaTarefa + '"></label>'
             montaTagCriacao += '</div>'
+            montaTagCriacao += '<td><button id="remover" class="btn btn-danger " onclick="removerTarefa();"><i class="far fa-trash-alt"></i></button></td>'
             montaTagCriacao += '</form>'
             montaTagCriacao += '</tr>'
 
@@ -127,22 +151,16 @@
 
     }
 
-    function removerTarefa() { //Funcao de remover tarefa
-        if (trSelecionado != undefined) {
-            $('#' + trSelecionado + '').remove();
-            var valorAtual = parseInt($('#contadorDeTarefa').val());
-            $('#contadorDeTarefa').val(valorAtual - 1);
-            trSelecionado = undefined;
-        } else {
-            alert('Valor não selecionado!');
-        }
+    function removerTarefa() {
+
+        $('#remover').parent().parent().remove();
+
     }
 
     function selecionaRow() { //Funcao de selecionar tarefa
         $('table tr').click(function () {
             trSelecionado = $(this).attr('id');
             $(`#alterarTarefa`).val($(`#` + trSelecionado + `>td`).text());
-            $(this).toggleClass('highlight');
         });
     }
 
