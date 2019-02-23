@@ -1,2 +1,5 @@
-# ProjetosCEUB
-Projetos CEUB
+- Para adicionar uma tarefa, digite no espaço onde está indicado, e clique no botão adicionar 
+- Para remover uma tarefa, selecione ela e clique no botão remover 
+- para alterar a tarefa, selecione a tarefa desejada e digite no espaço indicado para alterar tarefa o novo nome desejado, e após clique no botão de alterar 
+- para adicionar uma data a sua tarefa, selecione a data no espaço “data” 
+- para marcá-la como feita, clique sobre o check box ao lado da data da tarefa
